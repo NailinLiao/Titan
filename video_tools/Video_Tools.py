@@ -6,7 +6,7 @@ import os
 class Video_Tools:
 
     @staticmethod
-    def get_video_time(video_path, time_structure="%Y-%m-%d-%H-%M-%S"):
+    def get_video_timestamp(video_path, time_structure="%Y-%m-%d-%H-%M-%S"):
         # 匹配文件名获取起始时间戳
         start_frame_time = '-'.join(str(os.path.split(video_path)[-1]).split('_')[4:-2])
         print(start_frame_time)
@@ -24,7 +24,7 @@ class Video_Tools:
             return start_time, end_time, long_time
 
         else:
-            print('注意该视频文件受损:', video_path, '------》》》》并启用修复模式读取数据')
+            print('注意该视频文件受损:', video_path, '------》》》》并启用修复模式读取数据获取时间戳')
             # return 0, 0, 0
             count = 0
             while cap.isOpened():  # 当成功时
@@ -43,7 +43,7 @@ class Video_Tools:
         video_name = str(os.path.split(video_path)[-1]).split('.')[0]
         if not os.path.exists(save_path):
             os.makedirs(save_path)
-        start_time, end_time, long_time = Video_Tools.get_video_time(video_path)
+        start_time, end_time, long_time = Video_Tools.get_video_timestamp(video_path)
         cap = cv2.VideoCapture(video_path)  # 若参数为0， 则是本地摄像头
         fps = int(cap.get(cv2.CAP_PROP_FPS))  #
         one_frame_time = 1 / fps
